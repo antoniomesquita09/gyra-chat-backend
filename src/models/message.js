@@ -11,6 +11,11 @@ const schema = new Schema(
       ref: 'User',
       required: true,
     },
+    room: {
+      type: Schema.Types.ObjectId,
+      ref: 'Room',
+      required: true,
+    },
   },
   {
     timestamps: true,

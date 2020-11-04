@@ -5,6 +5,11 @@ export default gql`
     id: ID!
     content: String!
     author: User!
+    room: Room!
+  }
+
+  extend type Query {
+    messages(room: ID!): [Message!]
   }
 
   extend type Mutation {

@@ -20,5 +20,13 @@ export default {
       const room = await Room.create(input);
       return room;
     },
+
+    exitRoom: async (_, input) => {
+      const query = {
+        user: input.user,
+      };
+
+      return Room.findOneAndRemove(query);
+    },
   },
 };

@@ -14,5 +14,6 @@ export default gql`
 
   extend type Mutation {
     room(name: String!): Room
+    exitRoom(user: ID!): Room
   }
 `;

@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import config from '~/config'; // eslint-disable-line import/order
+import config from '~/core/config'; // eslint-disable-line import/order
 
 import util from 'util';
 import debug from 'debug';
@@ -8,7 +8,7 @@ import httpStatus from 'http-status';
 import asciify from 'asciify-image';
 /* eslint-disable import/first */
 
-import app from '~/config/express';
+import app from '~/core/express';
 import APIError from '~/errors/api-error';
 
 // connect to mongo db

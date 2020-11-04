@@ -9,7 +9,7 @@ import { ApolloServer } from 'apollo-server-express';
 
 import schema from '~/graphql/schema';
 import APIError from '~/errors/api-error';
-import config from './index';
+import config from './config';
 
 // create apollo server
 const server = new ApolloServer({

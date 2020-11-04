@@ -6,6 +6,10 @@ const schema = new Schema(
       type: String,
       required: true,
     },
+    room: {
+      type: Schema.Types.ObjectId,
+      ref: 'Room',
+    },
   },
   {
     timestamps: true,

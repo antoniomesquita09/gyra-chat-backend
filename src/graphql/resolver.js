@@ -6,6 +6,7 @@ const query = {
   Query: {
     ...user.Query,
     ...room.Query,
+    ...message.Query,
   },
 };
 
