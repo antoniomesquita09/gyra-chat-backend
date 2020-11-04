@@ -6,7 +6,7 @@ export default gql`
     name: String!
   }
   type Query {
-    me: User
+    users: [User!]
   }
   type Mutation {
     user(name: String!): User

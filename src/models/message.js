@@ -2,8 +2,13 @@ import { Schema, model } from 'mongoose';
 
 const schema = new Schema(
   {
-    name: {
+    content: {
       type: String,
+      required: true,
+    },
+    author: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
       required: true,
     },
   },
@@ -12,4 +17,4 @@ const schema = new Schema(
   }
 );
 
-export default model('User', schema);
+export default model('Message', schema);

@@ -7,7 +7,10 @@ export default {
   },
 
   Query: {
-    me: () => {},
+    users: async () => {
+      const users = await User.find();
+      return users;
+    },
   },
 
   Mutation: {

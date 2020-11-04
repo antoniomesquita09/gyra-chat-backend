@@ -21,8 +21,8 @@ EXPOSE $PORT
 
 FROM base as development
 
-CMD yarn start
+CMD yarn dev
 
 FROM base as production
 
-CMD yarn serve
+CMD yarn start
