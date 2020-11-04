@@ -1,6 +1,7 @@
 import express from 'express';
 import httpStatus from 'http-status';
 import helmet from 'helmet';
+import morgan from 'morgan';
 import mongoose from 'mongoose';
 import { ApolloServer } from 'apollo-server-express';
 
@@ -23,7 +24,13 @@ app.set('trust proxy', true);
 app.disable('x-powered-by');
 
 // secure apps by setting various HTTP headers
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: config.nodeEnv === 'production' ? undefined : false,
+  })
+);
+
+app.use(morgan('common'));
 
 // apply apollo middlleware
 server.applyMiddleware({

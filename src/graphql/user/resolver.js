@@ -1,7 +1,9 @@
+import User from '~models/user';
+
 export default {
   User: {
-    id: () => null,
-    name: () => null,
+    id: (user) => user.id,
+    name: (user) => user.name,
   },
 
   Query: {
@@ -9,8 +11,9 @@ export default {
   },
 
   Mutation: {
-    user: (name) => {
-      return name;
+    user: async (_, input) => {
+      const user = await User.create(input);
+      return user;
     },
   },
 };
