@@ -1,10 +1,18 @@
+import { PubSub } from 'apollo-server-express';
+
 import Message from '~models/message';
 import User from '~models/user';
+import APIError from '~/errors/api-error';
+
+const pubsub = new PubSub();
+
+const MESSAGE_SENT = 'messageSent';
 
 export default {
   Message: {
-    id: (user) => user.id,
-    name: (user) => user.name,
+    id: (message) => message.id,
+    content: (message) => message.content,
+    author: (message) => message.author,
   },
 
   Mutation: {
@@ -12,13 +20,22 @@ export default {
       const message = await Message.create(input);
       const { author: authorId } = input;
 
-      const author = await User.findById(authorId);
+      try {
+        const author = await User.findById(authorId);
+        message.author = author;
 
-      if (!author) throw new Error('User not found');
+        pubsub.publish(MESSAGE_SENT, { messageSent: message });
 
-      message.author = author;
-      await message.save();
-      return message.populate('author');
+        await message.save();
+        return message.populate('author');
+      } catch (e) {
+        throw new APIError('User not found');
+      }
+    },
+  },
+  Subscription: {
+    messageSent: {
+      subscribe: () => pubsub.asyncIterator(MESSAGE_SENT),
     },
   },
 };

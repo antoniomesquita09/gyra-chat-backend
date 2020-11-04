@@ -10,4 +10,8 @@ export default gql`
   extend type Mutation {
     message(content: String!, author: ID!): Message
   }
+
+  type Subscription {
+    messageSent: Message
+  }
 `;

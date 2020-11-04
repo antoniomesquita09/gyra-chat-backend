@@ -17,8 +17,17 @@ const mutation = {
   },
 };
 
+const subscription = {
+  Subscription: {
+    ...message.Subscription,
+  },
+};
+
 export default {
   ...user,
+  ...message,
+  ...room,
   ...query,
   ...mutation,
+  ...subscription,
 };

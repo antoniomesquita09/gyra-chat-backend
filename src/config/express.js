@@ -1,4 +1,6 @@
+/* eslint-disable no-console */
 import express from 'express';
+import http from 'http';
 import httpStatus from 'http-status';
 import helmet from 'helmet';
 import morgan from 'morgan';
@@ -12,6 +14,10 @@ import config from './index';
 // create apollo server
 const server = new ApolloServer({
   schema,
+  subscriptions: {
+    onConnect: () => console.info('✅ Connected to websocket'),
+    onDisconnect: () => console.info('Disconnect from websocket'),
+  },
 });
 
 // create express app
@@ -83,4 +89,7 @@ app.use((
   })
 );
 
-export default app;
+const httpServer = http.createServer(app);
+server.installSubscriptionHandlers(httpServer);
+
+export default httpServer;
