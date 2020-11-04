@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  gyra-chat-backend:
+    build:
+      context: .
+      target: development
+    volumes:
+      - ./src:/gyra-chat-backend/src
+    ports:
+      - $PORT:$PORT
+    env_file:
+      - .env
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/gyra-chat-backend
+      - DEBUG=gyra-chat-backend:*
+    links:
+      - mongo
+
+  mongo:
+    image: mongo:4.2.0
+    ports:
+      - 27017:27017
