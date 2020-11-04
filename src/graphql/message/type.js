@@ -17,6 +17,6 @@ export default gql`
   }
 
   type Subscription {
-    messageSent: Message
+    messageSent(room: ID!): Message
   }
 `;

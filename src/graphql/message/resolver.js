@@ -1,4 +1,5 @@
 import { PubSub } from 'apollo-server-express';
+import { withFilter } from 'apollo-server';
 
 import Message from '~models/message';
 import User from '~models/user';
@@ -62,7 +63,11 @@ export default {
 
   Subscription: {
     messageSent: {
-      subscribe: () => pubsub.asyncIterator(MESSAGE_SENT),
+      subscribe: withFilter(
+        () => pubsub.asyncIterator(MESSAGE_SENT),
+        (payload, variables) =>
+          payload.messageSent.room._id.equals(variables.room)
+      ),
     },
   },
 };
