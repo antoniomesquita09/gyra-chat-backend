@@ -25,13 +25,14 @@ export default {
 
       const options = {
         sort: {
-          createdAt: -1,
+          createdAt: 1,
         },
       };
 
       const messages = await Message.find(query, null, options).populate(
         'author'
       );
+
       return messages;
     },
   },

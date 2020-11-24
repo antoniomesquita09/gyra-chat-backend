@@ -1,11 +1,14 @@
 import { gql } from 'apollo-server';
 
 export default gql`
+  scalar Date
+
   type Message {
     id: ID!
     content: String!
     author: User!
     room: Room!
+    createdAt: Date!
   }
 
   extend type Query {
